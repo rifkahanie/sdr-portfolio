@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rifka Fathia Hanie — Sales Development Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0e0d;
+    --paper: #f7f4ef;
+    --cream: #ede9e1;
+    --accent: #c8402a;
+    --accent-light: #f0d4ce;
+    --muted: #7a7469;
+    --border: #d8d3ca;
+    --white: #ffffff;
+    --card: #faf8f5;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); font-size: 16px; line-height: 1.7; overflow-x: hidden; }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 4rem; background: rgba(247,244,239,0.93); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+  .nav-logo { font-family: 'DM Mono', monospace; font-size: 0.78rem; letter-spacing: 0.12em; color: var(--muted); text-transform: uppercase; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta { background: var(--ink) !important; color: var(--paper) !important; padding: 0.45rem 1.2rem !important; border-radius: 2px; }
+  .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; padding-top: 80px; }
+  .hero-left { display: flex; flex-direction: column; justify-content: center; padding: 6rem 4rem; border-right: 1px solid var(--border); }
+  .eyebrow { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
+  .eyebrow::before { content: ''; display: block; width: 32px; height: 1px; background: var(--accent); }
+  .hero-name { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 5vw, 4.2rem); font-weight: 700; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+  .hero-name em { font-style: italic; color: var(--accent); }
+  .hero-role { font-family: 'DM Mono', monospace; font-size: 0.8rem; letter-spacing: 0.1em; color: var(--muted); text-transform: uppercase; padding: 0.6rem 0; border-top: 1px solid var(--border); margin-bottom: 2rem; }
+  .hero-summary { font-size: 1.02rem; color: #3a3630; max-width: 480px; line-height: 1.85; margin-bottom: 2.5rem; }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 3rem; }
+  .tag { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.08em; padding: 0.3rem 0.8rem; border: 1px solid var(--border); border-radius: 2px; color: var(--muted); background: var(--cream); text-transform: uppercase; }
+  .tag.a { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+  .hero-btns { display: flex; gap: 1rem; }
+  .btn-p { background: var(--accent); color: #fff; padding: 0.85rem 1.8rem; border-radius: 2px; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border: 1px solid var(--accent); transition: all 0.2s; }
+  .btn-p:hover { background: #a83420; border-color: #a83420; }
+  .btn-s { color: var(--ink); padding: 0.85rem 1.8rem; border-radius: 2px; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border: 1px solid var(--border); transition: all 0.2s; }
+  .btn-s:hover { border-color: var(--ink); background: var(--cream); }
+  .hero-right { display: flex; flex-direction: column; justify-content: flex-end; padding: 4rem; background: var(--cream); position: relative; overflow: hidden; }
+  .hero-right::before { content: 'SDR'; position: absolute; top: -0.15em; right: -0.05em; font-family: 'Playfair Display', serif; font-size: 15rem; font-weight: 700; color: var(--border); line-height: 1; pointer-events: none; opacity: 0.55; }
+  .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); position: relative; z-index: 2; }
+  .stat { background: var(--paper); padding: 2rem; }
+  .stat-n { font-family: 'Playfair Display', serif; font-size: 2.6rem; font-weight: 700; line-height: 1; margin-bottom: 0.3rem; }
+  .stat-n span { color: var(--accent); }
+  .stat-l { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+  .avail { margin-top: 1.5rem; display: flex; align-items: center; gap: 0.75rem; font-size: 0.8rem; color: var(--muted); position: relative; z-index: 2; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; animation: pulse 2s ease-in-out infinite; flex-shrink: 0; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.6;transform:scale(0.85)} }
+  .proof-strip { background: var(--ink); color: var(--paper); padding: 1.4rem 4rem; display: flex; align-items: center; gap: 2.5rem; overflow-x: auto; }
+  .pi { display: flex; align-items: center; gap: 0.75rem; white-space: nowrap; flex-shrink: 0; }
+  .pi-icon { opacity: 0.5; font-size: 0.7rem; }
+  .pi-text { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.8; }
+  .pd { width: 1px; height: 18px; background: rgba(255,255,255,0.15); flex-shrink: 0; }
+  section { padding: 6rem 4rem; }
+  .slabel { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.75rem; }
+  .slabel::before { content: ''; display: block; width: 24px; height: 1px; background: var(--accent); }
+  .stitle { font-family: 'Playfair Display', serif; font-size: clamp(1.9rem, 3vw, 2.8rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1rem; }
+  .stitle em { font-style: italic; color: var(--accent); }
+  .sintro { font-size: 0.97rem; color: var(--muted); max-width: 560px; line-height: 1.85; margin-bottom: 3.5rem; }
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; border-top: 1px solid var(--border); }
+  .about-body { font-size: 1.02rem; line-height: 1.9; color: #3a3630; margin-bottom: 1.5rem; }
+  .about-body strong { color: var(--ink); font-weight: 500; }
+  .pullquote { border-left: 3px solid var(--accent); padding: 1.2rem 1.5rem; background: var(--accent-light); font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.05rem; color: var(--ink); line-height: 1.65; margin: 2rem 0; }
+  .cred-list { list-style: none; display: flex; flex-direction: column; gap: 1px; border: 1px solid var(--border); margin-bottom: 2.5rem; }
+  .cred-item { padding: 1.2rem 1.4rem; background: var(--card); display: flex; gap: 1.1rem; align-items: flex-start; }
+  .cred-item:nth-child(even) { background: var(--cream); }
+  .cred-icon { font-size: 1rem; flex-shrink: 0; margin-top: 0.1rem; }
+  .cred-title { font-size: 0.88rem; font-weight: 500; color: var(--ink); margin-bottom: 0.2rem; }
+  .cred-sub { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+  .tools-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .tool { background: var(--card); padding: 0.9rem; text-align: center; }
+  .tool-n { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.06em; color: var(--ink); text-transform: uppercase; }
+  .tool-u { font-size: 0.7rem; color: var(--muted); margin-top: 0.15rem; }
+  /* WORK */
+  .work-section { background: var(--cream); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .case { border: 1px solid var(--border); background: var(--paper); margin-bottom: 2rem; overflow: hidden; }
+  .case-head { display: grid; grid-template-columns: 1fr auto; gap: 2rem; padding: 2.5rem; border-bottom: 1px solid var(--border); background: var(--white); align-items: start; }
+  .case-lbl { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem; }
+  .case-ttl { font-family: 'Playfair Display', serif; font-size: 1.55rem; font-weight: 700; color: var(--ink); margin-bottom: 0.4rem; }
+  .case-sub { font-size: 0.85rem; color: var(--muted); }
+  .case-meta { display: flex; flex-direction: column; gap: 0.4rem; align-items: flex-end; }
+  .mtag { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.28rem 0.7rem; border: 1px solid var(--border); color: var(--muted); border-radius: 2px; }
+  .case-body { display: grid; grid-template-columns: 1fr 1fr; }
+  .case-narr { padding: 2.5rem; border-right: 1px solid var(--border); }
+  .case-narr h4 { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.65rem; margin-top: 1.5rem; }
+  .case-narr h4:first-child { margin-top: 0; }
+  .case-narr p { font-size: 0.9rem; line-height: 1.82; color: #3a3630; margin-bottom: 1rem; }
+  .case-narr p:last-child { margin-bottom: 0; }
+  .case-res { padding: 2.5rem; }
+  .res-lbl { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.25rem; }
+  .res-list { list-style: none; display: flex; flex-direction: column; gap: 1.1rem; }
+  .res-item { display: flex; gap: 1rem; align-items: flex-start; }
+  .res-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 0.55rem; }
+  .res-text { font-size: 0.87rem; color: #3a3630; line-height: 1.65; }
+  .res-text strong { color: var(--accent); font-weight: 500; display: block; font-size: 0.78rem; font-family: 'DM Mono', monospace; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 0.2rem; }
+  .case-foot { padding: 1.4rem 2.5rem; background: var(--ink); color: var(--paper); font-size: 0.87rem; display: flex; align-items: center; gap: 1rem; }
+  .case-foot::before { content: '→'; color: var(--accent); font-size: 1rem; flex-shrink: 0; }
+  .case-foot em { opacity: 0.65; font-style: italic; }
+  /* OUTREACH */
+  .out-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .out-card { background: var(--card); padding: 2rem; }
+  .out-step { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+  .out-ttl { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.65rem; color: var(--ink); }
+  .out-desc { font-size: 0.83rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.25rem; }
+  .email-box { background: var(--white); border: 1px solid var(--border); border-radius: 2px; overflow: hidden; }
+  .email-hd { padding: 0.7rem 1rem; border-bottom: 1px solid var(--border); background: var(--cream); }
+  .email-subj { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--ink); font-weight: 500; }
+  .email-met { font-size: 0.66rem; color: var(--muted); margin-top: 0.2rem; }
+  .email-bd { padding: 1rem; font-size: 0.77rem; color: #3a3630; line-height: 1.72; }
+  .email-bd p { margin-bottom: 0.5rem; }
+  .email-bd p:last-child { margin-bottom: 0; }
+  /* METHOD */
+  .method-section { background: var(--ink); color: var(--paper); border-top: 1px solid #1e1e1e; }
+  .method-section .slabel { color: var(--accent); }
+  .method-section .slabel::before { background: var(--accent); }
+  .method-section .stitle { color: var(--paper); }
+  .method-section .sintro { color: rgba(247,244,239,0.55); }
+  .meth-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.08); }
+  .meth-card { background: var(--ink); padding: 2rem; position: relative; overflow: hidden; }
+  .meth-card::before { content: attr(data-n); position: absolute; top: -0.25em; right: 0.05em; font-family: 'Playfair Display', serif; font-size: 6rem; font-weight: 700; color: rgba(255,255,255,0.035); line-height: 1; pointer-events: none; }
+  .meth-step { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.65rem; }
+  .meth-ttl { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: var(--paper); margin-bottom: 0.65rem; }
+  .meth-desc { font-size: 0.82rem; color: rgba(247,244,239,0.55); line-height: 1.75; }
+  /* TESTIMONIALS */
+  .test-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .test-card { border: 1px solid var(--border); padding: 2.5rem; background: var(--card); position: relative; }
+  .test-card::before { content: '\201C'; position: absolute; top: 1rem; left: 2rem; font-family: 'Playfair Display', serif; font-size: 5rem; color: var(--accent-light); line-height: 1; pointer-events: none; }
+  .test-text { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.97rem; line-height: 1.78; color: var(--ink); margin-bottom: 1.5rem; padding-top: 2rem; position: relative; z-index: 1; }
+  .test-author { display: flex; align-items: center; gap: 0.75rem; border-top: 1px solid var(--border); padding-top: 1.2rem; }
+  .test-avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--accent-light); display: flex; align-items: center; justify-content: center; font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--accent); font-weight: 500; flex-shrink: 0; }
+  .test-name { font-size: 0.85rem; font-weight: 500; color: var(--ink); }
+  .test-role { font-size: 0.75rem; color: var(--muted); }
+  /* CTA */
+  .cta-section { background: var(--accent); color: #fff; padding: 6rem 4rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .cta-lbl { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.7; margin-bottom: 0.9rem; display: flex; align-items: center; gap: 0.75rem; }
+  .cta-lbl::before { content: ''; display: block; width: 24px; height: 1px; background: rgba(255,255,255,0.5); }
+  .cta-ttl { font-family: 'Playfair Display', serif; font-size: clamp(1.9rem, 3vw, 2.8rem); font-weight: 700; line-height: 1.1; margin-bottom: 1.2rem; }
+  .cta-txt { font-size: 0.97rem; opacity: 0.85; line-height: 1.75; }
+  .cta-btns { display: flex; gap: 1rem; margin-top: 1.5rem; }
+  .btn-w { background: #fff; color: var(--accent); padding: 0.85rem 1.8rem; border-radius: 2px; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border: 1px solid #fff; transition: all 0.2s; }
+  .btn-w:hover { background: transparent; color: #fff; }
+  .btn-gw { color: #fff; padding: 0.85rem 1.8rem; border-radius: 2px; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border: 1px solid rgba(255,255,255,0.4); transition: all 0.2s; }
+  .btn-gw:hover { background: rgba(255,255,255,0.15); }
+  .contact-block { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-item { display: flex; align-items: center; gap: 1rem; padding: 1.2rem 1.4rem; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); }
+  .ci-icon { font-size: 1rem; flex-shrink: 0; }
+  .ci-lbl { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.6; margin-bottom: 0.15rem; }
+  .ci-val { font-size: 0.88rem; font-weight: 500; }
+  .ci-val a { color: #fff; text-decoration: none; }
+  footer { background: var(--ink); color: rgba(247,244,239,0.35); padding: 1.75rem 4rem; display: flex; justify-content: space-between; align-items: center; font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.08em; }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+  .hero-left > * { animation: fadeUp 0.55s ease both; }
+  .eyebrow{animation-delay:0.1s}.hero-name{animation-delay:0.2s}.hero-role{animation-delay:0.3s}.hero-summary{animation-delay:0.4s}.tags{animation-delay:0.5s}.hero-btns{animation-delay:0.6s}
+  @media(max-width:900px){
+    nav{padding:1rem 2rem}
+    .nav-links{display:none}
+    .hero{grid-template-columns:1fr;min-height:auto}
+    .hero-left{padding:6rem 2rem 3rem;border-right:none;border-bottom:1px solid var(--border)}
+    .hero-right{padding:3rem 2rem}
+    section{padding:4rem 2rem}
+    .about-grid{grid-template-columns:1fr;gap:3rem}
+    .case-body{grid-template-columns:1fr}
+    .case-narr{border-right:none;border-bottom:1px solid var(--border)}
+    .out-grid{grid-template-columns:1fr}
+    .meth-grid{grid-template-columns:1fr 1fr}
+    .test-grid{grid-template-columns:1fr}
+    .cta-section{grid-template-columns:1fr;gap:3rem;padding:4rem 2rem}
+    footer{flex-direction:column;gap:0.5rem;text-align:center;padding:2rem}
+    .tools-grid{grid-template-columns:repeat(2,1fr)}
+    .proof-strip{padding:1.4rem 2rem;gap:1.5rem}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">Rifka · SDR Portfolio</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#outreach">Outreach</a></li>
+    <li><a href="#contact" class="nav-cta">Let's Talk</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <p class="eyebrow">Sales Development Portfolio</p>
+    <h1 class="hero-name">Rifka<br><em>Fathia Hanie</em></h1>
+    <p class="hero-role">SDR · BDR · Sales Operations · Remote</p>
+    <p class="hero-summary">I build the systems SDR teams run on — prospecting pipelines, automated outreach sequences, CRM infrastructure, and weekly reporting. Based in West Java, Indonesia. Available across AU, SG, and US time zones.</p>
+    <div class="tags">
+      <span class="tag a">Open to Remote SDR / BDR</span>
+      <span class="tag">HubSpot Certified</span>
+      <span class="tag">Apollo · Zapier</span>
+      <span class="tag">IELTS Band 8.0</span>
+      <span class="tag">AU · SG · US Markets</span>
+    </div>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-p">Book an Intro Call</a>
+      <a href="#work" class="btn-s">View Work Samples</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-n">5<span>-step</span></div>
+        <div class="stat-l">Cold outreach sequences built in HubSpot — multi-touch, automated, personalized</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n">3<span>k+</span></div>
+        <div class="stat-l">Prospects segmented in Apollo across AU, SG & US health/wellness markets</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n">8.<span>0</span></div>
+        <div class="stat-l">IELTS Band — Listening 9.0, Reading 9.0. Native-level English for AU & US clients</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n">9</div>
+        <div class="stat-l">External sponsors prospected, pitched & closed across three student leadership roles</div>
+      </div>
+    </div>
+    <div class="avail">
+      <span class="dot"></span>
+      Available for immediate start · Remote only · Full-time or contract
+    </div>
+  </div>
+</div>
+
+<!-- PROOF STRIP -->
+<div class="proof-strip">
+  <div class="pi"><span class="pi-icon">◆</span><span class="pi-text">HubSpot Sales Hub Certified — Apr 2026</span></div>
+  <div class="pd"></div>
+  <div class="pi"><span class="pi-icon">◆</span><span class="pi-text">SGB VA Bootcamp — Singapore, Feb 2026</span></div>
+  <div class="pd"></div>
+  <div class="pi"><span class="pi-icon">◆</span><span class="pi-text">Apollo · HubSpot · Zapier · Make · Airtable</span></div>
+  <div class="pd"></div>
+  <div class="pi"><span class="pi-icon">◆</span><span class="pi-text">B.Sc Food Science — Brawijaya University, 2024 · GPA 3.39</span></div>
+  <div class="pd"></div>
+  <div class="pi"><span class="pi-icon">◆</span><span class="pi-text">Target markets: Health · Wellness · SaaS · E-commerce</span></div>
+</div>
+
+<!-- ABOUT -->
+<section class="about-grid" id="about">
+  <div>
+    <p class="slabel">About</p>
+    <h2 class="stitle">Why I belong<br>in <em>sales</em></h2>
+    <div class="pullquote">"Before I knew what an SDR was, I was already doing the job — identifying targets, building the case, making the pitch, and closing the sponsor."</div>
+    <p class="about-body">I didn't come from a traditional sales background. I came from food science research, lab management, and coordinating practical sessions for 170+ students at Brawijaya University. What that taught me — precision, structured communication, and making complex information clear and actionable — is exactly what makes a strong SDR.</p>
+    <p class="about-body">Across three student leadership roles, I prospected, pitched, and closed <strong>9 external sponsors</strong> for events ranging from Rp 1.5 million to Rp 6 million — through targeted outreach, stakeholder negotiations, and follow-up management. That's outbound sales. I just didn't have the label yet.</p>
+    <p class="about-body">Since early 2026 I've been building deliberately: HubSpot certified, Apollo trained, outreach sequences built inside real CRM pipelines, lead lists segmented and ready for outreach. My IELTS Band 8.0 means AU, SG, and US clients hear native-level English — which matters more than most candidates realize when competing for remote roles internationally.</p>
+    <p class="about-body">I'm looking for a remote SDR or BDR role where I can prospect consistently, run structured multi-channel outreach, and help a sales team build a pipeline they can actually trust.</p>
+  </div>
+  <div>
+    <p class="slabel" style="margin-top:0">Credentials</p>
+    <ul class="cred-list">
+      <li class="cred-item">
+        <span class="cred-icon">🏅</span>
+        <div><div class="cred-title">HubSpot Sales Hub Software Certified</div><div class="cred-sub">HubSpot Academy · April 2026 – May 2027 · CRM pipeline management, sales sequences, contact & deal tracking, meeting scheduling tools</div></div>
+      </li>
+      <li class="cred-item">
+        <span class="cred-icon">🏅</span>
+        <div><div class="cred-title">SGB Virtual Assistant Training Program</div><div class="cred-sub">Singapore-based certification · Jan–Feb 2026 · Lead generation research, inbox & calendar management, workflow organization, admin support projects</div></div>
+      </li>
+      <li class="cred-item">
+        <span class="cred-icon">🌐</span>
+        <div><div class="cred-title">IELTS Academic — Overall Band 8.0</div><div class="cred-sub">IDP Education · July 2025 · Listening: 9.0 · Reading: 9.0 · Writing: 7.5 · Speaking: 6.5</div></div>
+      </li>
+      <li class="cred-item">
+        <span class="cred-icon">🎓</span>
+        <div><div class="cred-title">B.Sc Food Science & Technology — GPA 3.39/4.00</div><div class="cred-sub">Universitas Brawijaya · 2024 · Research methodology, structured data documentation, analytical problem-solving</div></div>
+      </li>
+    </ul>
+    <p class="slabel">Tools I work with</p>
+    <div class="tools-grid">
+      <div class="tool"><div class="tool-n">HubSpot</div><div class="tool-u">CRM · Sequences · Reporting</div></div>
+      <div class="tool"><div class="tool-n">Apollo</div><div class="tool-u">Prospecting · Lead lists</div></div>
+      <div class="tool"><div class="tool-n">Zapier</div><div class="tool-u">Workflow automation</div></div>
+      <div class="tool"><div class="tool-n">Make</div><div class="tool-u">Advanced automation</div></div>
+      <div class="tool"><div class="tool-n">Google Sheets</div><div class="tool-u">Tracking · Dashboards</div></div>
+      <div class="tool"><div class="tool-n">Loom</div><div class="tool-u">Async video outreach</div></div>
+      <div class="tool"><div class="tool-n">Airtable</div><div class="tool-u">Prospect databases</div></div>
+      <div class="tool"><div class="tool-n">Calendly</div><div class="tool-u">Meeting scheduling</div></div>
+      <div class="tool"><div class="tool-n">Notion</div><div class="tool-u">Docs · SOPs</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK SAMPLES -->
+<section class="work-section" id="work">
+  <p class="slabel">Work Samples</p>
+  <h2 class="stitle">What I've <em>built</em></h2>
+  <p class="sintro">Two portfolio case studies built inside HubSpot and Apollo — showing the full SDR workflow from prospecting and segmentation through to pipeline reporting.</p>
+
+  <div class="case">
+    <div class="case-head">
+      <div>
+        <p class="case-lbl">Case Study 01 · Sales Operations</p>
+        <h3 class="case-ttl">CRM & Pipeline Management</h3>
+        <p class="case-sub">Client: Elevate SaaS Solutions — B2B project management tool for remote teams ($49–$499/month)</p>
+      </div>
+      <div class="case-meta">
+        <span class="mtag">HubSpot Sales Hub</span>
+        <span class="mtag">Zapier</span>
+        <span class="mtag">Google Workspace</span>
+      </div>
+    </div>
+    <div class="case-body">
+      <div class="case-narr">
+        <h4>The situation</h4>
+        <p>Elevate SaaS Solutions had a real pipeline problem. Two SDRs and one account executive were tracking 8+ active deals in a shared Google Sheet with no visibility into who owned which lead, what stage each deal was at, or which prospects had gone cold. Deals were slipping not because of poor selling — but because the system behind the selling was broken.</p>
+        <h4>What I built</h4>
+        <p>I set up a full HubSpot CRM pipeline from scratch: structured contact records with tags and activity logs, and custom deal stages mapped to Elevate's actual sales motion — New Lead → First Outreach Sent → Discovery Call Booked → Demo Completed → Proposal Sent → Negotiation → Closed — with probability weighting at each stage so the team could forecast revenue accurately.</p>
+        <p>I built a 5-step cold outreach sequence targeting Operations Managers and COOs at companies with 10–200 employees. All five emails automated across 15 days, with personalized variables, timed delays, and unenrollment triggers for prospects who replied. I configured a round-robin meeting booking page with calendar sync, intake questions, and automated 1-hour pre-call reminder emails.</p>
+        <p>Finally, I built a weekly pipeline report and drafted a recurring update email for the sales manager — covering open deals by stage, revenue forecast by owner, and flagged contacts with no activity in 5+ days. Turned raw HubSpot data into a Monday morning decision tool.</p>
+      </div>
+      <div class="case-res">
+        <p class="res-lbl">Key outcomes</p>
+        <ul class="res-list">
+          <li class="res-item"><span class="res-dot"></span><div class="res-text"><strong>Full pipeline visibility</strong>9 custom deal stages with probability tracking and deal owner assignment — replaced a spreadsheet where deals were falling through the gaps weekly.</div></li>
+          <li class="res-item"><span class="res-dot"></span><div class="res-text"><strong>Automated outreach sequence</strong>5-step, 15-day cold email sequence with 100% automated steps, personalized variables, and A/B test capability built in from Day 1.</div></li>
+          <li class="res-item"><span class="res-dot"></span><div class="res-text"><strong>Meeting scheduling system</strong>Round-robin discovery call booking with intake pre-qualification questions, Google Meet links, and automated 1-hour reminder emails — zero manual coordination.</div></li>
+          <li class="res-item"><span class="res-dot"></span><div class="res-text"><strong>Weekly pipeline reporting</strong>Recurring report covering deal health, revenue forecast by owner, and flagged stale contacts — gave the sales manager a clear weekly decision tool.</div></li>
+          <li class="res-item"><span class="res-dot"></span><div class="res-text"><strong>Complete sales infrastructure</strong>Went from a broken spreadsheet to a fully operational HubSpot setup — contacts, deals, sequences, scheduling, and reporting all connected.</div></li>
+        </ul>
+      </div>
+    </div>
+    <div class="case-foot">Transformed an unmanaged contact list into a structured, automated CRM pipeline — <em>giving full visibility into every relationship and reducing manual sales admin significantly.</em></div>
+  </div>
+
+  <div class="case">
+    <div class="case-head">
+      <div>
+        <p class="case-lbl">Case Study 02 · Lead Generation & Strategy</p>
+        <h3 class="case-ttl">Lead Generation Strategy & Analysis</h3>
+        <p class="case-sub">Client: JOOCYEE (@joocyeeindonesia) — Indonesian C-beauty brand on Instagram & Shopee</p>
+      </div>
+      <div class="case-meta">
+        <span class="mtag">Apollo</span>
+        <span class="mtag">Excel</span>
+        <span class="mtag">Research Tools</span>
+        <span class="mtag">AI Tools</span>
+      </div>
+    </div>
+    <div class="case-body">
+      <div class="case-narr">
+        <h4>The situation</h4>
+        <p>The client was a local Indonesian C-beauty brand with strong product quality but no structured approach to finding and reaching potential stockists, collaborators, or wholesale buyers. Outreach had been inconsistent and untargeted — built on guesswork rather than data. Growth had plateaued not because the product was weak, but because the lead generation strategy behind it was missing entirely.</p>
+        <h4>What I did</h4>
+        <p>I began by mapping the competitive landscape — analyzing JOOCYEE's positioning against direct and indirect competitors across pricing, audience targeting, social proof, and channel strategy. I identified where the brand's messaging was misaligned with how their target audience actually made purchasing decisions on TikTok Shop and Shopee.</p>
+        <p>Using Apollo and manual research, I built a segmented prospect database of 3,000+ contacts filtered by industry, company size, platform presence, and buyer behavior signals. For each segment I developed a personalized outreach angle based on the contact's business context — referencing their LinkedIn activity, company growth signals, and specific pain points relevant to their role.</p>
+        <p>I delivered a structured strategic recommendation report prioritizing lead generation actions by implementation difficulty and expected impact — giving the client a clear roadmap they could act on immediately, not just a data dump.</p>
+      </div>
+      <div class="case-res">
+        <p class="res-lbl">Key outcomes</p>
+        <ul class="res-list">
+          <li class="res-item"><span class="res-dot"></span><div class="res-text"><strong>Competitive analysis</strong>Full competitor audit covering product positioning, pricing, social proof, and channel distribution — surfaced 4 specific positioning gaps the client could act on immediately.</div></li>
+          <li class="res-item"><span class="res-dot"></span><div class="res-text"><strong>Audience behavior mapping</strong>Mapped customer motivations, decision triggers, and engagement barriers — produced an insight-led targeting framework aligned with actual buyer behavior.</div></li>
+          <li class="res-item"><span class="res-dot"></span><div class="res-text"><strong>Apollo lead list — 3,000+ contacts</strong>Segmented prospect database with verified contact data, industry and location filters, Shopify store detection, and a custom outreach angle column for each contact type.</div></li>
+          <li class="res-item"><span class="res-dot"></span><div class="res-text"><strong>Channel & conversion audit</strong>Audited website, Instagram, and Shopee presence to identify conversion bottlenecks and where leads were dropping off.</div></li>
+          <li class="res-item"><span class="res-dot"></span><div class="res-text"><strong>Prioritized strategy roadmap</strong>Actionable recommendations ranked by implementation priority — a clear picture of who to target, how to reach them, and what to fix first.</div></li>
+        </ul>
+      </div>
+    </div>
+    <div class="case-foot">Transformed scattered outreach into structured strategic alignment — <em>giving the client a clear picture of who to target, how to reach them, and what to fix first.</em></div>
+  </div>
+</section>
+
+<!-- OUTREACH SAMPLES -->
+<section id="outreach" style="border-top:1px solid var(--border)">
+  <p class="slabel">Outreach Samples</p>
+  <h2 class="stitle">How I write<br><em>cold emails</em></h2>
+  <p class="sintro">Three emails from the "Cold Outreach: Operations Leaders" sequence built in HubSpot for Elevate SaaS Solutions. Written for Operations Managers and COOs at 10–200 person companies.</p>
+  <div class="out-grid">
+    <div class="out-card">
+      <p class="out-step">Email 1 · Day 1</p>
+      <h3 class="out-ttl">The opener — lead with a question</h3>
+      <p class="out-desc">Permission-based and curiosity-driven. One question that surfaces the pain point without explaining the product.</p>
+      <div class="email-box">
+        <div class="email-hd"><div class="email-subj">How {{Company Name}} handles cross-team visibility?</div><div class="email-met">To: Operations Manager · Day 1 · Automated</div></div>
+        <div class="email-bd">
+          <p>Hi {{First Name}},</p>
+          <p>Quick question — how does {{Company Name}} currently keep distributed teams aligned on project status without constant check-in meetings?</p>
+          <p>Most ops leaders I talk to end up choosing between two bad options: too many meetings, or too little visibility.</p>
+          <p>Elevate was built for that gap — project status, blockers, and ownership always visible without anyone having to ask.</p>
+          <p>Worth a 20-minute call to see if it's relevant?</p>
+          <p>— Rifka</p>
+        </div>
+      </div>
+    </div>
+    <div class="out-card">
+      <p class="out-step">Email 3 · Day 7</p>
+      <h3 class="out-ttl">The proof — case study, no pressure</h3>
+      <p class="out-desc">Social proof from a similar company, framed as relevant context rather than a sales claim. Short and direct.</p>
+      <div class="email-box">
+        <div class="email-hd"><div class="email-subj">{{First Name}} — a quick case study you might find relevant</div><div class="email-met">To: Operations Manager · Day 7 · Automated</div></div>
+        <div class="email-bd">
+          <p>Hi {{First Name}},</p>
+          <p>One more from me — I'll keep it short.</p>
+          <p>Firewerk Solutions came to us with the same challenge: 15-person team, 3 time zones, Asana wasn't cutting it.</p>
+          <p>Within 30 days: onboarding time dropped, status meetings cut in half, ops lead got back ~5 hours a week.</p>
+          <p>Happy to share the full breakdown — or just jump on a quick call.</p>
+          <p>[Book a time → meetings link]</p>
+          <p>— Rifka</p>
+        </div>
+      </div>
+    </div>
+    <div class="out-card">
+      <p class="out-step">Email 5 · Day 15</p>
+      <h3 class="out-ttl">The close — leave the door open</h3>
+      <p class="out-desc">Final email. Honest, no pressure, value summary — and a clear re-entry point for when timing is right.</p>
+      <div class="email-box">
+        <div class="email-hd"><div class="email-subj">Closing the loop — {{First Name}} · NEW THREAD</div><div class="email-met">To: Operations Manager · Day 15 · Automated</div></div>
+        <div class="email-bd">
+          <p>Hi {{First Name}},</p>
+          <p>This will be my last email — I don't want to overstay my welcome.</p>
+          <p>Before I close this out, here's what Elevate could mean for {{Company Name}}:</p>
+          <p>· 40% fewer recurring status meetings<br>· Onboarding new projects in hours, not days<br>· One platform your whole team actually uses</p>
+          <p>I'll leave the demo link below for when the timing is right.</p>
+          <p>→ [meetings link]</p>
+          <p>Wishing the {{Company Name}} team a strong Q2.</p>
+          <p>— Rifka</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METHODOLOGY -->
+<section class="method-section">
+  <p class="slabel">How I work</p>
+  <h2 class="stitle">My SDR <em>methodology</em></h2>
+  <p class="sintro">The process I follow for every prospecting campaign — from first research to first reply.</p>
+  <div class="meth-grid">
+    <div class="meth-card" data-n="1">
+      <p class="meth-step">Step 01</p>
+      <h3 class="meth-ttl">Research & Segment</h3>
+      <p class="meth-desc">Start in Apollo — filtering by industry, location, company size, and buying intent signals. Every lead list is segmented before a single email is written. I research each prospect's LinkedIn and company context to develop a personalized outreach angle before outreach begins.</p>
+    </div>
+    <div class="meth-card" data-n="2">
+      <p class="meth-step">Step 02</p>
+      <h3 class="meth-ttl">Build the Sequence</h3>
+      <p class="meth-desc">Multi-touch outreach sequences in HubSpot — typically 5 steps across 15 days, mixing automated emails with manual call tasks and LinkedIn touches. Every email has a distinct purpose: question, value, proof, low-friction ask, close. Subject lines and personalization tokens set before enrollment.</p>
+    </div>
+    <div class="meth-card" data-n="3">
+      <p class="meth-step">Step 03</p>
+      <h3 class="meth-ttl">Execute & Track</h3>
+      <p class="meth-desc">Every outreach touch is logged — channel, step, date, status — in a structured tracker. I monitor reply rates, open rates, and bounce rates by sequence step to identify where prospects are dropping off and adjust. No lead falls through without a documented reason.</p>
+    </div>
+    <div class="meth-card" data-n="4">
+      <p class="meth-step">Step 04</p>
+      <h3 class="meth-ttl">Report & Iterate</h3>
+      <p class="meth-desc">Weekly pipeline reports pulled from HubSpot and delivered as a written summary — covering what's moving, what's stalled, and what needs attention. When sequences underperform, I test subject line variants and adjust timing before re-enrolling cold contacts.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section style="border-top:1px solid var(--border)" id="testimonials">
+  <p class="slabel">What others say</p>
+  <h2 class="stitle">In their <em>own words</em></h2>
+  <p class="sintro">Feedback from people I've worked with directly — on professionalism, analytical thinking, and reliability under pressure.</p>
+  <div class="test-grid">
+    <div class="test-card">
+      <p class="test-text">"I had the pleasure of working with Rifka and was impressed by her professionalism, strong analytical skills, and reliability. She approaches tasks with structure, attention to detail, and a commitment to quality. Rifka is adaptable, communicative, and dependable, making her a valuable asset in any professional setting."</p>
+      <div class="test-author">
+        <div class="test-avatar">AN</div>
+        <div><div class="test-name">Ariqah Nadia</div><div class="test-role">Co-worker</div></div>
+      </div>
+    </div>
+    <div class="test-card">
+      <p class="test-text">"Rifka is a dedicated student with strong academic achievements and critical thinking skills. She has a solid grasp of complex concepts, particularly in process design and problem-solving. Despite initial challenges, she has effectively translated theory into practical solutions. Her active participation, valuable insights, and attention to detail make her exceptional."</p>
+      <div class="test-author">
+        <div class="test-avatar">SW</div>
+        <div><div class="test-name">Dr. Siti Narsito Wulan, STP., MP. MSc</div><div class="test-role">Lecturer, Universitas Brawijaya</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact" style="padding-top:6rem;padding-bottom:6rem;">
+  <div>
+    <p class="cta-lbl">Let's talk</p>
+    <h2 class="cta-ttl">Ready when<br>you are</h2>
+    <p class="cta-txt">I'm actively looking for remote SDR or BDR roles — full-time or contract. I typically respond within 24 hours and am available across AU, SG, and US time zones. If you're building a sales team and need someone who can prospect, sequence, and report — let's have a 20-minute call.</p>
+    <div class="cta-btns">
+      <a href="https://forms.gle/1Heh49dhFTgWYjXv8" class="btn-w" target="_blank">Book an Intro Call</a>
+      <a href="mailto:rifkahanie@gmail.com" class="btn-gw">Send an Email</a>
+    </div>
+  </div>
+  <div>
+    <div class="contact-block">
+      <div class="contact-item"><span class="ci-icon">✉</span><div><div class="ci-lbl">Email</div><div class="ci-val"><a href="mailto:rifkahanie@gmail.com">rifkahanie@gmail.com</a></div></div></div>
+      <div class="contact-item"><span class="ci-icon">💼</span><div><div class="ci-lbl">LinkedIn</div><div class="ci-val"><a href="https://linkedin.com/in/rifkahanie" target="_blank">linkedin.com/in/rifkahanie</a></div></div></div>
+      <div class="contact-item"><span class="ci-icon">📱</span><div><div class="ci-lbl">WhatsApp</div><div class="ci-val">+62 813 1701 1025</div></div></div>
+      <div class="contact-item"><span class="ci-icon">🕐</span><div><div class="ci-lbl">Timezone</div><div class="ci-val">GMT+7 · Flexible for AU, SG & US</div></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>Rifka Fathia Hanie · Sales Development Portfolio · 2026</span>
+  <span>West Java, Indonesia · Available Remote Globally</span>
+</footer>
+
+</body>
+</html>
